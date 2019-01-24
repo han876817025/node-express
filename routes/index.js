@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+// import admin from './admin';
+import user from '../controller/user/index'
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+export default (app) => {
+    // app.post('/register',()=>{
+    //     console.log(100)
+    // })
+    app.post('/login', user.register);
+}

@@ -1,7 +1,7 @@
 import express from 'express';
 // import db from './mongodb/db.js';
 import config from 'config-lite';
-import router from './routes/index.js';
+import routes from './routes/index.js';
 import cookieParser from 'cookie-parser'
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
@@ -11,9 +11,10 @@ import path from 'path';
 import history from 'connect-history-api-fallback';
 import chalk from 'chalk';
 // import Statistic from './middlewares/statistic'
-
+var bodyParser = require('body-parser');//解析,用req.body获取post参数
 const app = express();
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 app.all('*', (req, res, next) => {
     const {origin, Origin, referer, Referer} = req.headers;
     const allowOrigin = origin || Origin || referer || Referer || '*';
@@ -55,7 +56,7 @@ app.use(session({
 //     ]
 // }));
 
-// router(app);
+routes(app);
 
 // app.use(expressWinston.errorLogger({
 //     transports: [
@@ -68,12 +69,6 @@ app.use(session({
 //         })
 //     ]
 // }));
-router(app);
-app.get('/a', (req, res) => {
-    res.status(200);
-    res.json(1231)
-
-});
 app.use(history());
 app.use(express.static(path.join(__dirname, 'public')))
 app.listen(config.port, () => {

@@ -6,21 +6,10 @@
 </head>
 <body>
 <div>12313131</div>
+<button id="bt">点我啊</button>
 </body>
-<script src="jquery.js">
-
-</script>
+<script src="javascripts/jquery.js"></script>
+<script src="javascripts/index.js"></script>
 <script>
-    var a=function(){
-        $.ajax({
-            url: 'http://localhost:8001/a' ,//n为任意参数，服务端通过req.params.id获取
-            type: 'get'
-        }).then((res) => {
-            console.log(res)
-        }).catch((err) => {
-            console.log(err)
-        })
-    }
-    a();
 </script>
 </html>
